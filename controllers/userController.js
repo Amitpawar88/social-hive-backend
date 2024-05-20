@@ -81,6 +81,7 @@ export const Login = async (req, res) => {
       .cookie("token", token, { expiresIn: "1d", httpOnly: true })
       .json({
         message: `Welcome back ${user.name}`,
+        user,
         success: true,
       });
   } catch (error) {
@@ -128,13 +129,13 @@ export const bookmark = async (req, res) => {
 
 export const getMyProfile = async (req, res) => {
   try {
-    const id = req.params.id;
-    const user = await User.findById(id).select("-password");
-    return res.status(200).json({
-      user,
-    });
+      const id = req.params.id;
+      const user = await User.findById(id).select("-password");
+      return res.status(200).json({
+          user,
+      })
   } catch (error) {
-    console.log(error);
+      console.log(error);
   }
 };
 
