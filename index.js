@@ -19,7 +19,8 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
-    origin: "https://socialhive-puce.vercel.app",
+    origin: [process.env.FRONTEND_URL],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }
 app.use(cors(corsOptions));
